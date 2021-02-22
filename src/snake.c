@@ -19,6 +19,7 @@ typedef struct {
 
 typedef struct {
 	UVector2I position;
+	UVector2I size;
 }Object;
 
 typedef struct{
@@ -42,11 +43,15 @@ Player player;
 
 void main() {
 
+	//Initialise Player members
 	player.movementVector.x = 0;
 	player.movementVector.y = 0;
+	player.movementSpeed = 1;
+
 	player.object.position.x = SCREEN_X_MAX / 2;
 	player.object.position.y = SCREEN_Y_MAX / 2;
-	player.movementSpeed = 1;
+	player.object.size.x = 8;
+	player.object.size.y = 8;
 
 	init();
 	
@@ -131,6 +136,23 @@ void ApplyPlayerPosition(){
 	else if(player.object.position.y > SCREEN_Y_MAX){
 		player.object.position.y = SCREEN_Y_MIN;
 	}
+}
+
+UINT8 CollisionCheck(Object object1, Object object2) {
+
+	if ((object1.position.x < (object2.position.x + object1.size.x)) && 
+		((object1.position.x + object1.size.x) > object2.position.x) && 
+		(object1.position.y < (object2.size.y + object2.position.y)) && 
+		((object1.position.y + object1.size.y) > object2.position.y)) {
+		
+		return 1;
+	
+	} else {
+		
+		return 0;
+	
+	}
+
 }
 
 
