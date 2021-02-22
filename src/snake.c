@@ -2,6 +2,12 @@
 #include <stdio.h>
 #include <stdbool.h> 
 
+const int SCREEN_X_MIN = 0;
+const int SCREEN_X_MAX = 160;
+
+const int SCREEN_Y_MIN = 0;
+const int SCREEN_Y_MAX = 160;
+
 typedef struct {
 	INT8 x;
 	INT8 y;
@@ -114,6 +120,19 @@ void checkInput() {
 void ApplyPlayerPosition(){
 	player.object.position.x += player.movementVector.x;
 	player.object.position.y += player.movementVector.y;
+
+	if(player.object.position.x <= SCREEN_X_MIN){
+		player.object.position.x = SCREEN_X_MAX;
+	}
+	else if(player.object.position.x > SCREEN_X_MAX){
+		player.object.position.x = SCREEN_X_MIN;
+	}
+	else if(player.object.position.y <= SCREEN_Y_MIN){
+		player.object.position.y = SCREEN_Y_MAX;
+	}
+	else if(player.object.position.y > SCREEN_Y_MAX){
+		player.object.position.y = SCREEN_Y_MIN;
+	}
 }
 
 
