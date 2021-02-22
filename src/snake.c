@@ -44,8 +44,8 @@ void main() {
 
 	player.movementVector.x = 0;
 	player.movementVector.y = 0;
-	player.object.position.x = 80;
-	player.object.position.y = 72;
+	player.object.position.x = SCREEN_X_MAX / 2;
+	player.object.position.y = SCREEN_Y_MAX / 2;
 	player.movementSpeed = 1;
 
 	init();
@@ -115,6 +115,7 @@ void checkInput() {
 
 
 void ApplyPlayerPosition(){
+
 	player.object.position.x += player.movementVector.x;
 	player.object.position.y += player.movementVector.y;
 
